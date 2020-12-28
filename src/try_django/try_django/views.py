@@ -7,7 +7,7 @@ from blog.models import BlogPost
 
 
 def home_page(request):
-    my_title ="Hello there........"
+    my_title ="Hello my people......."
     qs = BlogPost.objects.all()[:5]
     context = {"title":"Welcome to Try Django", 'blog_list':qs}
     return render(request, "home.html", context)
