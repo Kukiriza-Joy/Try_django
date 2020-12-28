@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='row' >
+
+ {% include 'blog/list-inline.html' with blog_post=object detail=True %}
+{% if request.user.is_authenticated %}
+   {% if request.user.is_staff %}
+    <div class='col-12'>
+      <a href="{{ object.get_edit_url }}">Edit</a>
+      <a href="{{ object.get_delete_url }}">Delete</a>
+    </div>
+   {% endif %}
+{% endif %}
+</div>
+{% endblock %}
+
+
+
+<br><br>
+<hr>
+<div class="main-comment-section">
+  {{ comments.count }} Comment{{ comments|pluralize }}
+  {% for comment in comments %}
+  <blockquote class="blockquote">
+    <p class="mb-0">{{ comment.content }}</p>
+    <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
+  </blockquote>
+  {% endfor %}
+
+</div>
